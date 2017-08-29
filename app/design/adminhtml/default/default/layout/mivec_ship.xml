@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <ship_adminhtml_carrier_index>
+        <reference name="content">
+            <block type="ship/adminhtml_carrier" name="carrier" />
+        </reference>
+    </ship_adminhtml_carrier_index>
+	
+    <ship_adminhtml_quote_index>
+        <reference name="content">
+            <block type="ship/adminhtml_quote" name="shipping_quote" />
+        </reference>
+    </ship_adminhtml_quote_index>
+	
+    <ship_adminhtml_express_index>
+        <reference name="content">
+            <block type="ship/adminhtml_express" name="shipping_quote_express" />
+        </reference>
+    </ship_adminhtml_express_index>
+	
+    <ship_adminhtml_airmail_index>
+        <reference name="content">
+            <block type="ship/adminhtml_airmail" name="shipping_quote_airmail" />
+        </reference>
+    </ship_adminhtml_airmail_index>
+	
+</layout>

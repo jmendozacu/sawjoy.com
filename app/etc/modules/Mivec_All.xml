@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+		<Mivec_Product>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Mivec_Product>
+		
+		<Mivec_Banner>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Mivec_Banner>
+		
+        <Mivec_Shipping>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mivec_Shipping>
+		
+        <Mivec_Ship>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mivec_Ship>
+
+        <Mivec_Support>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Mivec_Support>
+
+        <Mivec_Orderhook>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Mivec_Orderhook>
+
+    </modules>
+</config>

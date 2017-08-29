@@ -1,0 +1,14 @@
+<config>
+    <modules>
+        <Mirasvit_SearchIndex>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Mirasvit_SearchIndex>
+		
+        <!--Mage_ConfigurableSwatches>
+            <depends>
+                <Mirasvit_SearchIndex/>
+            </depends>
+        </Mage_ConfigurableSwatches-->
+    </modules>
+</config>

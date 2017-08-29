@@ -1,0 +1,102 @@
+<div class="bordered-section article">
+    <h2>Open New Support Ticket</h2>
+    <div class="brcrm">
+        <span class="left">Provide ticket details below. When reporting a problem make sure to provide as much relevant information as possible</span>
+        <div class="clearfix"></div>
+    </div>
+    <form enctype="multipart/form-data" method="post" action="" class="p19" id="ticketsform">
+        <input name="make" type="hidden" value="addticket">
+        <table width="100%" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td valign="middle" colspan="2">
+                    <label class="labelTitle">Issue Type</label>
+                    <?php echo $this->getHtmlType();?>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+            <tr>
+                <td valign="middle" colspan="2">
+                    <label class="labelTitle">Department</label>
+                    <?php echo $this->getHtmlDepartment();?>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+            <tr>
+                <td id="p2" class="dptpriority" width="300">
+                    <label class="labelTitle">Priority</label>
+                    <?php echo $this->getHtmlPriority();?>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+            <tr class="even">
+                <td colspan="2">
+                    <label for="subject" class="labelTitle">Subject</label>
+                    <input type="text" value="" name="subject" style="width: 99%;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="body" class="labelTitle">Message</label>
+                    <textarea style="width: 99%;" cols="60" rows="12" name="body" id="ticketmessage"></textarea>
+                    <div id="hintarea" style="display:none" class="well"></div>
+                </td>
+            </tr>
+            <!--BOF: FILEUPLOAD Provide url to file upload handler in data-url -->
+            <tr class="even">
+                <td colspan="2" id="fileupload" data-url="?cmd=tickets&amp;action=handleupload">
+                    <div id="dropzonecontainer">
+                        <div id="dropzone"><h2>Drop files here to attach them</h2></div>
+                        <div class="fileupload-buttonbar">
+                            <div class="span5" style="float:left">
+                                <!-- The fileinput-button span is used to style the file input field as button -->
+                                <span class="btn btn-mini fileinput-button">
+<i class="icon-plus"></i>
+<span><b style="font-size: 14px;font-weight: bold;">+</b> Add files...</span>
+<input type="file" name="attachments[]" multiple="">
+</span>
+                                <div class="fs11">(Allowed File Extension: .jpg, .gif, .zip, .png, .pdf)</div>
+                            </div>
+                            <!-- The global progress information -->
+                            <div class="span5 fileupload-progress fade" style="float:left">
+                                <!-- The global progress bar -->
+                                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="bar" style="width:0%;"></div>
+                                </div>
+                                <!-- The extended global progress information -->
+                                <div class="progress-extended">&nbsp;</div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- The table listing the files available for upload/download -->
+                        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                        <!--EOF: FILEUPLOAD -->
+                        <!--
+                        <label>Attachments</label>
+                        <input type="file" size="50" name="attachments[]" />
+                        <a onclick="return addAnother(this)" href="#" >Add another</a><br/>
+                        <div id="fileuploads"/>
+                        </td>
+                        -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="form-actions">
+                        <div class="left" style="margin-right:20px;">
+                            <img src="?cmd=root&amp;action=captcha" alt="captcha">
+                        </div>
+                        <div class="left">
+                            <p>Type the characters you can see in the image below<br></p>
+                            <input type="text" value="" size="15" name="image_verification" style="width:100px">
+                        </div>
+                        <div class="right"><input type="submit" value="Submit" class="btn btn-success btn-large" style="font-weight: bold" id="submitbutton"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

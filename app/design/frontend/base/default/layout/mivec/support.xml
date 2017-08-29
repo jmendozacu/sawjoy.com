@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout version="0.1.0">
+    <support_ticket_post>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="content">
+            <block type="support/ticket_form" name="ticket_form" template="mivec/support/ticket/form.phtml"/>
+        </reference>
+    </support_ticket_post>
+</layout>

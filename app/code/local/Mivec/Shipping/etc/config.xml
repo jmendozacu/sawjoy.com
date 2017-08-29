@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Mivec_Shipping>
+            <version>0.1</version>
+            <depends>
+                <Mage_Shipping />
+            </depends>
+        </Mivec_Shipping>
+    </modules>
+
+    <global>
+        <models>
+            <mivec_shipping>
+                <class>Mivec_Shipping_Model</class>
+            </mivec_shipping>
+        </models>
+    </global>
+
+    <default>
+        <carriers>
+            <mivec_shippingex>
+                <active>0</active>
+                <model>mivec_shipping_model_rate_express</model>
+                <title>International Express</title>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>1</sort_order>
+            </mivec_shippingex>
+			
+            <mivec_shippingar>
+                <active>0</active>
+                <model>mivec_shipping_model_rate_airmail</model>
+                <title>International Airmail</title>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>2</sort_order>
+            </mivec_shippingar>
+        </carriers>
+    </default>
+
+</config>

@@ -1,0 +1,172 @@
+<?php
+//edit by mivec
+$urlRequest = Mage::app()->getFrontController()->getRequest();
+$_pathInfo = $urlRequest->getPathInfo();
+
+if ($_pathInfo == '/') :
+if(!$this->getConfig('enabled')) return;
+$slider = $this->getBrandlogo();
+if(!count($slider)) return;
+$media = Mage::getBaseUrl('media');	
+$_webRrandUrl = Mage::getBaseUrl();
+?>
+<section class="brandlogo-wrapper hidden-xs">
+	<div class="brandlogo-contain">
+		
+			<div class="bx-title brand-title"><h2><?php echo "Compatible For These Brands";//$this->__('Buy Featured, Branded Products') ?></h2></div>
+			<ul class="bxslider">
+				<?php
+				foreach($slider as $slide) :
+					$image  = $media;
+					$image .= $slide['image'];
+					$_title = strtolower($slide['title']);
+				?>
+				<li class="item"><?php if( $slide['link'] ) { ?>
+							<a href="javascript:;" title="<?php echo $slide['title']?>" onclick="getBrandData('<?php echo $_title?>')">
+							<img src="<?php echo $image;?>" alt="<?php echo $slide['title']?>" /></a>												
+						<?php } else { ?>
+							<img src="<?php echo $image;?>" alt="<?php echo $slide['title']?>" />
+						<?php } ?>																																	             
+				    <?php if( $this->getConfig('description')): ?>
+					<div class="st-des">
+					    <div class="st-des-title"><h2><?php echo $slide['title'] ?></h2></div>
+					    <div class="st-des-content"><?php echo $slide['description'] ?></div>
+					</div>
+				    <?php endif; ?>
+				</li>
+				<?php
+			    endforeach
+				?>
+		    </ul>
+		
+		<script type="text/javascript">
+	   //<![CDATA[
+		jQuery(document).ready(function($){
+		  $('.brandlogo-contain .bxslider').bxSlider(
+			{
+			<?php if($this->getConfig('auto')) { ?>
+			  auto: true,
+			<?php } ?>
+			  speed: <?php echo $this->getConfig('speed') ?>,
+			  pause: <?php echo $this->getConfig('interval') ?>,			  
+			  minSlides: 1,
+			  infiniteLoop: true,
+			  maxSlides: <?php echo $this->getConfig('items_show') ?>,
+			  slideWidth: <?php echo $this->getConfig('item_width') ?>,
+			  slideMargin: 5,
+			  autoHover: true,
+			  moveSlides:1,
+		     <?php if ($this->getConfig('nav_ctrl')) { ?>
+			  pager: true,
+			<?php } else { ?> 
+			  pager:false, 
+			<?php } ?>
+			<?php if ($this->getConfig('next_back')) { ?>
+				controls: true,
+			<?php } else { ?>
+				controls:false,
+			<?php } ?>
+			  onSliderLoad:function(){
+				  
+			  },
+			}
+		  );
+		});
+		//]]>
+	</script>
+	</div>
+	<!-- （Modal） -->
+	<div class="modal fade" id="brandModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" 
+							aria-hidden="true">×
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						Choose what you need
+					</h4>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-info" 
+							data-dismiss="modal">Close
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var dataGroup = {
+		'apple':['101','590','190','230'],
+		'samsung':['103','591','191','116'],
+		'htc':['156','155','192','117'],
+		'lg':['157','160','193','118'],
+		'sony':['127','161','196','122'],
+		'nokia':['159','162','195','413'],
+		'huawei':['291','163','194','119'],
+		'oneplus':['158','164','197','124']
+	};
+	
+	var leftCatalog = ['Phone Bag&Case' , 'Screen Protectors' , 'Holders&Stands'];
+	var modalCtn = '';
+	
+	getBrandData = function(brandSelect){
+		var brand = brandSelect;
+		var brandData = dataGroup[brand];
+		modalCtn = '<div class="container-fluid"><h4>'+brand+'</h4><div class="row"><div class="col-sm-6 col-md-6 col-lg-6">'+
+			'<h5>Mobilephone Accessory</h5><ul id="phoneAcc"></ul></div><div class="col-sm-6 col-md-6 col-lg-6">'+
+			'<h5>Mobilephone Parts</h5><ul id="phoneParts"></ul></div></div></div>';
+		jQuery(".modal-body").html(modalCtn);
+		//remove li
+		jQuery("#phoneAcc,#phoneParts").html('');
+		renderBrandModal(brand,brandData);
+		jQuery('#brandModal').modal({show:true,keyboard: true});
+	}
+	
+	/*get jsonData and add to html*/
+	function renderBrandModal(brand,brandData){
+		if(brandData.length==4){
+			for(var i=0;i<3;i++){
+				ajaxBrand(brandData[i],'main',i);
+			}
+			ajaxBrand(brandData[3],'parent','0');
+		}
+		/*ajax data by id and method*/
+		function ajaxBrand(c_id,c_method,i){
+			if(jQuery.ajax){
+				jQuery.ajax({
+					type:"post",
+					async:true, 
+					url:"<?php echo $_webRrandUrl.'mivec/catalog/category/ajax.get.php'?>",
+					data:{category_id:c_id,method:c_method},
+					dataType:"json",
+					success:function(data){
+						var tmpData = data;
+						if(c_method =='main'){
+							jQuery("ul#phoneAcc").append('<li><a href="'+tmpData[0].url+'">'+leftCatalog[i]+'</a></li>');
+						}else if(c_method == 'parent'){
+							var len = tmpData.length;
+							var ulCtn = '';
+							for(var k=0;k<len;k++){
+								ulCtn += '<li><a href="'+tmpData[k].url+'">'+tmpData[k].name+'</a></li>';
+							}
+							jQuery("ul#phoneParts").html(ulCtn);
+							//sort phoneParts
+							var partLi = jQuery("#phoneParts li");
+							partLi.sort(function(a,b){
+								 return a.innerHTML<b.innerHTML?1:-1;
+							});
+							jQuery('#phoneParts').empty().append(partLi);
+						}
+					}
+				});
+			}
+		}
+	}
+});
+</script>
+</section>
+<?php endif;?>

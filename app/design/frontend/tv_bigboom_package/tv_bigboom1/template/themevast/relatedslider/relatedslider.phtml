@@ -1,0 +1,72 @@
+<?php
+if(!Mage::getStoreConfig('relatedslider/general/enabled')) return;
+?>
+<?php if(!$this->getItems()->getSize()) return; ?>
+<?php
+    $_helper = Mage::helper('relatedslider');
+    // getConfig
+    $widthImage     = $_helper->getConfig('widthImage') ? $_helper->getConfig('widthImage') : 135;
+    $heightImage    = $_helper->getConfig('heightImage') ? $_helper->getConfig('heightImage') : 135;
+    $price          = $_helper->getConfig('price');
+    $cart           = $_helper->getConfig('cart');
+    // $compare        = $this->getConfig('compare');
+    $wishlist       = $_helper->getConfig('wishlist');
+    $review         = $_helper->getConfig('review');
+	$rows           = 4; //show rows
+    //$class          = ($rows > 1) ? '.slide-multirows' : '.products-grid';
+?>
+
+<div class="relatedslider hidden-xs">
+    <?php echo $_helper->getConfig('title') ? '<div class="bx-title related-title"><h2 class="title">' .$_helper->getConfig('title'). '</h2></div>' : ''; ?>
+		<?php if ($rows > 1): ?>
+		<div class="slide-multirows">
+		<?php endif ?>
+		<?php $_collectionSize = count($this->getItems()); //echo $_collectionSize;exit;?> <?php //$_collectionSize = $_productCollection->count()?>
+		<?php $_columnCount = 4 ?>
+		<?php $j=0; $time = $this->getConfig('playDelay') ? $this->getConfig('playDelay') : 0; ?><?php //playDelay?>
+		<?php $i=0; foreach ($this->getItems() as $_item): ?>
+			<?php $t = $j*$time; $t .='ms'; $j++; ?>
+			<?php if ($i++%$_columnCount==0): ?>
+			<ul class="products-grid">
+			<?php endif ?>
+				<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> item-animate">
+					<div class="item-inner">
+						<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize( $widthImage, $heightImage ) ?>" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
+						<div class="product-details">
+							<p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></p> 
+							<?php if( $review ): ?>
+								<?php echo $this->getReviewsSummaryHtml($_item) ?>
+							<?php endif; ?>
+							<?php if( $price ): ?>
+								<?php echo $this->getPriceHtml($_item, true, '-related') ?>
+							<?php endif; ?>
+						</div>
+					</div>
+				</li>
+			<?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+			</ul>
+			<?php endif ?>
+			<?php endforeach ?>
+			<?php if ($rows > 1): ?>
+	<?php endif ?>
+	</div>
+</div>
+<script type="text/javascript">	
+	jQuery(document).ready(function($){
+		(function(selector){
+			var $content = $(selector);
+			var $slider  = $('.slide-multirows', $content);
+			var slider 	 = $slider.unbind('bxSlider').bxSlider({
+					auto: 0, 
+					speed: 600, 
+					controls: 1, 
+					pager: 0, 
+					maxSlides: 1,  								
+					infiniteLoop: false,
+					moveSlides:1,
+					slideMargin: 0,
+					autoHover: true, 
+			})
+		})(".relatedslider");
+	});
+</script>

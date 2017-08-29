@@ -1,0 +1,238 @@
+<?php
+$_slider['a'] = $this->getBannerSlider(3);
+$_slider['b'] = $this->getBannerSlider(4);
+
+function getCategory($_id)
+{
+	$category = Mage::getModel('catalog/category')->load($_id);
+	return $category;
+}
+
+function getCategories($_parentId , $_path = 1)
+{
+	$collection = Mage::getModel('catalog/category')->getCollection()
+        ->addAttributeToFilter('is_active', 1) //only active categories
+        ->addAttributeToFilter('parent_id', $_parentId);
+	
+	return $collection;
+	//print_r($collection->getItems());exit;
+	
+}
+
+$_mediaPath = Mage::getBaseUrl('media') . '/themevast/banner/';
+//echo $_mediaPath;exit;
+
+$_phoneAccId = 89;
+$_phonAcc['parent'] = getCategory($_phoneAccId);
+$_phonAcc['sub'] = getCategories($_phoneAccId);
+
+$_phonePartsId = 90;
+$_phoneParts['parent'] = getCategory($_phonePartsId);
+$_phoneParts['sub'] = getCategories($_phonePartsId);
+
+$_webUrl = Mage::getBaseUrl();
+?>
+<!--edit by jerry 
+    为下面section新增一个Childhtml导入
+    accessory
+-->
+<div class="access-wrapper phone-access">
+    <div class="access-content">
+        <div class="access-box container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+                    <div class="kind-Category left">
+                        <h4><a href="<?php echo $_phonAcc['parent']->getUrl()?>" title="<?php echo $_phonAcc['parent']->getName()?>"><?php echo $_phonAcc['parent']->getName()?></a></h4>
+                        <ul>
+                        <?php 
+						foreach($_phonAcc['sub'] as $_item):
+							$category = getCategory($_item->getId());
+						?>
+                        <li><a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName();?>"><?php echo $category->getName();?></a></li>
+                        <?php endforeach;?>
+                        </ul>
+                    </div>
+                    <div class="kind-Slide right">
+                        <ul class="kind-SlideList">
+                        <!-- edit by mivec -->
+                        <?php
+						//edit by mivec  category slider_a
+						if ($_slider['a']):
+							foreach ($_slider['a']->getItems() as $_item) :
+							//print_r($_item->gettitle());exit;
+						?>
+                            <li class="item">
+                            <a href="<?php echo $_item->getLink()?>">
+                            <img src="<?php echo Mage::getBaseUrl('media') . $_item->getImage()?>" alt="<?php echo $_item->getTitle();?>">
+                            </a>
+                            </li>
+                        <?php endforeach;endif;?>
+                            <!--li class="item"><a href="javascript:void(0)">
+                                <img src="//192.168.1.250:90/skin/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/kind-S2.jpg" alt="">
+                            </a></li>
+                            <li class="item"><a href="javascript:void(0)">
+                                <img src="//192.168.1.250:90/skin/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/kind-S3.jpg" alt="">
+                            </a></li-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="kind-R">
+                        <div class="kind-R1 left">
+                         <?php $category = getCategory(89);?>
+                            <a href="<?php echo $_webUrl . "lianguang-case-sony-z2-white.html"?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r_main.jpg"?>" alt="">
+                            </a>
+                        </div>
+                        <div class="kind-R2 right">
+                        <?php $category = getCategory(96);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r_charger.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 left">
+                        <?php $category = getCategory(95);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r_screen.jpg"?>" alt="">
+                               <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 left">
+                        <?php $category = getCategory(96);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r_cable.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 right">
+                        <?php $category = getCategory(99);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r_holder.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+edit by jerry
+为下面section新增一个Childhtml导入
+Mobile phone parts-->
+<section class="access-wrapper phone-parts">
+    <div class="access-content">
+        <div class="access-box container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+                    <div class="kind-Category left">
+                        <h4><a href="<?php echo $_phoneParts['parent']->getUrl()?>" title="<?php echo $_phoneParts['parent']->getName()?>"><?php echo $_phonAcc['parent']->getName()?></a></h4>
+                        <ul>
+                        <?php 
+						foreach($_phoneParts['sub'] as $_item):
+							$category = getCategory($_item->getId());
+						?>
+                        <li><a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName();?>"><?php echo $category->getName();?></a></li>
+                        <?php endforeach;?>
+                        </ul>
+                    </div>
+                    <div class="kind-Slide right">
+                        <ul class="kind-SlideList">
+                        <!-- edit by mivec -->
+                        <?php
+						//edit by mivec
+						if ($_slider['b']):
+							foreach ($_slider['b']->getItems() as $_item) :
+							//print_r($_item->gettitle());exit;
+						?>
+                            <li class="item">
+                            <a href="<?php echo $_item->getLink()?>">
+                            <img src="<?php echo Mage::getBaseUrl('media') . $_item->getImage()?>" alt="<?php echo $_item->getTitle();?>">
+                            </a>
+                            </li>
+                        <?php endforeach;endif;?>
+                        </ul>
+                    </div>
+                </div>
+                <script type="text/javascript">	
+                        jQuery(document).ready(function($){
+                        $('.phone-access .kind-SlideList').bxSlider({
+                            auto:1,
+                            slideWidth: 349,
+                            slideMargin: 0,
+                            mode: 'horizontal',
+                            minSlides: 1,
+                            maxSlides:1,
+                            pager: 0,
+                            speed: 600,
+                            pause: 5000,
+                            moveSlides:1,
+                            infiniteLoop: 1,
+                            controls:1,
+                        });
+                    });	
+                </script>
+                <script>
+                    jQuery(document).ready(function($){
+                        $('.phone-parts .kind-SlideList').bxSlider({
+                            auto:1,
+                            slideWidth: 349,
+                            slideMargin: 0,
+                            mode: 'horizontal',
+                            minSlides: 1,
+                            maxSlides:1,
+                            pager: 0,
+                            speed: 600,
+                            pause: 5000,
+                            moveSlides:1,
+                            infiniteLoop: 1,
+                            controls:1,
+                            autoHover: true,
+                        });
+                    });
+                </script>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="kind-R">
+                        <div class="kind-R1 left">
+                        <?php $category = getCategory(90);?>
+                            <a href="<?php echo $_webUrl . "best-668-screwdriver-philips-ph000.html"?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r2_repair.jpg"?>" alt="">
+                            </a>
+                        </div>
+                        <div class="kind-R2 right">
+                        <?php $category = getCategory(106);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r2_lcd.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 left">
+                        <?php $category = getCategory(108);?>
+                            <a href="<?php echo $_webUrl . "mobilephone-parts/samsung.html"?>">
+                                <img src="<?php echo $_mediaPath . "banner_slider_r2_battery.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 left">
+                        <?php $category = getCategory(107);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+							<img src="<?php echo $_mediaPath . "banner_slider_r2_flex_cable.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                        <div class="kind-R2 right">
+                        <?php $category = getCategory(107);?>
+                            <a href="<?php echo $category->getUrl()?>" title="<?php echo $category->getName()?>">
+                            <img src="<?php echo $_mediaPath . "banner_slider_r2_camera.jpg"?>" alt="">
+                                <p><?php echo $category->getName()?></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

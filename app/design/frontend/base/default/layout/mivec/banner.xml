@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="banner_home_slider">
+            <!--<block type="banner/home_slider" name="banner_home_slider" template="mivec/banner/slider.phtml" />-->
+        </reference>
+    </cms_index_index>
+</layout> 
+

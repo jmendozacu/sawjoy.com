@@ -1,0 +1,39 @@
+<?php
+$urlRequest = Mage::app()->getFrontController()->getRequest();
+$_pathInfo = $urlRequest->getPathInfo();
+//echo $_pathInfo;
+
+$_path = "";
+//echo $_pathInfo . "</p>";
+//echo strpos($_pathInfo , "log");exit;
+
+if (stripos($_pathInfo , "log")):
+	if (stripos($_pathInfo , 'product')) {
+		$_path = 'product';
+	} else {
+		$_path = "category";
+	}
+	
+	$_position  = array(
+		'product'	=> 6,
+		'category'	=> 5
+	);
+
+$image = Mage::getModel('banner/manager')
+	->getCollection()
+	->addAttributeToFilter('position' , $_position[$_path])
+	->addAttributeToFilter('status' , 1)
+	->setPageSize(2);
+
+//echo $image->getSelect()->__toString();
+//print_r($image->getItems());exit;
+
+?>
+<div class="banner-left hidden-xs">
+<?php foreach ($image->getItems() as $_item) : //echo Mage::getBaseUrl('media').DS.$_item->getImage();exit;//print_r($_item);exit;?>
+<a href="<?php echo $_item->getLink();?>" title="<?php echo $_item->getTitle()?>">
+<img class="catalog" alt="" src="<?php echo Mage::getBaseUrl('media').DS.$_item->getImage();?>" style="display:block;margin-top:10px"/>
+</a>
+<?php endforeach;?>
+</div>
+<?php endif;?>

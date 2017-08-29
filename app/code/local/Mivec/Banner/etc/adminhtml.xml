@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <mivec translate="title" module="banner">
+            <title>MIVEC</title>
+            <sort_order>80</sort_order>
+            <children>
+                <banner translate="title" module="banner">
+                    <title>Banner Manage</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <items translate="title" module="banner">
+                            <title>Manage Items</title>
+                            <sort_order>0</sort_order>
+                            <action>banner/adminhtml_manager</action>
+                        </items>
+                    </children>
+                </banner>
+            </children>
+        </mivec>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <banner>
+                                        <title>banner</title>
+                                    </banner>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <mivec translate="title" module="banner">
+                        <title>MIVEC</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <banner translate="title" module="banner">
+                                <title>Banner Mange</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <items translate="title" module="banner">
+                                        <title>Manage Items</title>
+                                        <sort_order>0</sort_order>
+                                        <action>banner/adminhtml_manager</action>
+                                    </items>
+                                </children>
+                            </banner>
+                        </children>
+                    </mivec>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+</config>

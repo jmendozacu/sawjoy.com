@@ -1,0 +1,25 @@
+<?php 
+//edit by mivec
+/*$currentUrl = Mage::helper('core/url')->getCurrentUrl();
+$url = Mage::getSingleton('core/url')->parseUrl($currentUrl);
+$path = $url->getPath();*/
+
+$urlRequest = Mage::app()->getFrontController()->getRequest();
+$_pathInfo = $urlRequest->getPathInfo();
+//print_r($urlRequest->getPathInfo());
+
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner_left')->toHtml() 
+?>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		(function(){
+			jQuery(".banner-left img").each(function(){
+				if($("#narrow-by-list").html()!==null){
+					$(".catalog").css('display','none');
+				}else{
+					$(".view").css('display','none');
+				}
+			});
+		})();
+	});
+</script>

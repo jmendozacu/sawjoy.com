@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <support_adminhtml_type_index>
+        <reference name="content">
+            <block type="support/adminhtml_type" name="ticket_type" />
+        </reference>
+    </support_adminhtml_type_index>
+    <support_adminhtml_department_index>
+        <reference name="content">
+            <block type="support/adminhtml_department" name="ticket_department" />
+        </reference>
+    </support_adminhtml_department_index>
+    <support_adminhtml_ticket_index>
+        <reference name="content">
+            <block type="support/adminhtml_ticket" name="ticket" />
+        </reference>
+    </support_adminhtml_ticket_index>
+</layout>

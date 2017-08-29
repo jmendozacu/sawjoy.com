@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Mivec_Ship>
+            <version>0.1</version>
+        </Mivec_Ship>
+    </modules>
+    <frontend>
+        <routers>
+            <ship>
+                <use>standard</use>
+                <args>
+                    <module>Mivec_Ship</module>
+                    <frontName>ship</frontName>
+                </args>
+            </ship>
+        </routers>
+        <layout>
+            <updates>
+                <ship>
+                    <file>mivec/ship.xml</file>
+                </ship>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<ship>
+				<use>admin</use>
+				<args>
+					<module>Mivec_Ship</module>
+					<frontName>ship</frontName>
+				</args>
+			</ship>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<mivec module="ship">
+				<title>MIVEC</title>
+				<sort_order>71</sort_order> 
+				<children>
+					<ship translate="title" module="ship">
+						<title>Shipping</title>
+						<sort_order>71</sort_order> 
+						<children>
+							<carrier module="ship" translate="title">
+								<title>Carrier</title>
+								<sort_order>1</sort_order>
+								<action>ship/adminhtml_carrier</action>
+							</carrier>
+							<quote_express module="ship" translate="title">
+								<title>Shipping Quote Express</title>
+								<sort_order>3</sort_order>
+								<action>ship/adminhtml_express</action>
+							</quote_express>
+							<quote_airmail module="ship" translate="title">
+								<title>Shipping Quote Airmail</title>
+								<sort_order>3</sort_order>
+								<action>ship/adminhtml_airmail</action>
+							</quote_airmail>
+						</children>    
+					</ship>
+				</children>
+			</mivec>
+		</menu>
+		
+		<layout>
+			<updates>
+				<ship>
+					<file>mivec_ship.xml</file>
+				</ship>
+			</updates>
+		</layout>
+    </adminhtml>
+	
+    <global>
+        <models>
+            <ship>
+                <class>Mivec_Ship_Model</class>
+				<resourceModel>shipping_mysql4</resourceModel>
+            </ship>
+            <shipping_mysql4>
+                <class>Mivec_Ship_Model_Mysql4</class>
+                <entities>
+                    <country>
+                        <table>mivec_shipping_country</table>
+                    </country>
+                    <carrier>
+                        <table>mivec_shipping_carrier</table>
+                    </carrier>			
+                    <express>
+                        <table>mivec_shipping_quote_express</table>
+                    </express>
+                    <airmail>
+                        <table>mivec_shipping_quote_airmail</table>
+                    </airmail>
+                </entities>
+            </shipping_mysql4>
+        </models>
+        <resources>
+            <ship_setup>
+                <setup>
+                    <module>Mivec_Ship</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ship_setup>
+            <ship_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ship_write>
+            <ship_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ship_read>
+        </resources>
+        <blocks>
+            <ship>
+                <class>Mivec_Ship_Block</class>
+            </ship>
+        </blocks>
+        <helpers>
+            <ship>
+                <class>Mivec_Ship_Helper</class>
+            </ship>
+        </helpers>
+    </global>
+</config>

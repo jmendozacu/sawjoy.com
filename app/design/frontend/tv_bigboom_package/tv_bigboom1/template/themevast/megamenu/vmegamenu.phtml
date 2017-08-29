@@ -1,0 +1,105 @@
+<div class="nav-vcontainer hidden-xs hidden-sm">
+    <div class="nav-inner">
+        <div class="vmegamenu-title"><h2><i class="fa fa-bars"></i><?php echo $this->__('Categories') ?></h2></div>
+        <div class="vmegamenu-contain">
+            <div id="nav_vmegamenu" class="nav_vmegamenu">
+                <?php $megamenu =  $this->getLayout()->createBlock('megamenu/megamenu'); ?>       
+                <?php //echo $megamenu->drawMegamenuHome(); ?>
+                <?php echo $megamenu->drawMegamenuMain(); ?>        
+                <?php //echo $megamenu->drawMegamenuExtra(); ?>
+                <?php //echo $megamenu->drawMegamenuLink(); ?>
+            </div>
+        </div>
+		<!-- add by jerry,05/22-->
+		<div id="vmegamenu-background"></div>
+		<div id="vmegamenu-mask"></div>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var MEGAMENU_EFFECT = <?php echo (int)Mage::getStoreConfig('megamenu/general/effect')?>;
+        
+        //]]>
+    </script>
+	<script type="text/javascript">
+			//add by jerry
+			/*
+			*set .dropdown top
+			*/
+			;jQuery(document).ready(function($){
+				$("#vmegamenu-background").css('height','282px');
+				(function(){
+					jQuery(".vmegamenu-contain .megamenu").each(function(){
+						var tmpMindex = $(this).index();
+						var tmpHeight = 40;
+						$(this).find(".dropdown").css('top',-tmpMindex*tmpHeight+'px');
+					});
+				})();
+			});
+			/*
+			*get back height
+			*/
+			jQuery(document).ready(function($){
+				$("#nav_vmegamenu .megamenu").find(".dropdown").removeClass("dropdownShow").addClass("dropdownHide");
+				$("#nav_vmegamenu").mouseout(function(){
+					$("#nav_vmegamenu .megamenu").find(".dropdownShow").addClass("dropdownHide").removeClass("dropdownShow");
+				});
+				get_back_Height();
+				function get_back_Height(){
+					var tmpH1 = $(".vmegamenu-contain").height();
+					jQuery(".dropdown").css("min-height",tmpH1+'px');
+					var tmpH2 = 0;
+					$("#nav_vmegamenu").on("mouseover",".megamenu",function(){
+						var tmpIndex = $(this).index();
+						//set other dropdown css display:none;
+						$("#nav_vmegamenu .megamenu").eq(tmpIndex).find(".dropdown").removeClass("dropdownHide").addClass("dropdownShow").end()
+							.siblings().find(".dropdown").addClass("dropdownHide").removeClass("dropdownShow");
+							
+						tmpH2 = $(".dropdownShow").height();
+						var tmpHeight = tmpH1>tmpH2?tmpH1:tmpH2;
+						$("#vmegamenu-background").css('height',(tmpHeight+1)+'px');
+					});
+				}
+			});
+			/*
+			*set back,mask left,width
+			*/
+			jQuery(document).ready(function($){
+				set_back_left_width();
+				$(window).resize(function () {
+					set_back_left_width();
+				});
+				function set_back_left_width(){
+					var tmp_vmegameny_width = $(document).width();//May IE show the bug
+					var tmp_vmegameny_left = -$(".nav-vcontainer").offset().left;
+					jQuery("#vmegamenu-background,#vmegamenu-mask").css({'left':tmp_vmegameny_left+'px','width':tmp_vmegameny_width+'px'});
+				}
+			});
+			jQuery(document).ready(function($){
+				/*
+				*set viewmore
+				*/
+				$('.itemMenu.level2>div.itemSubMenu.level2').remove();
+				$('.itemMenu.level1').each(function(){
+					var $itemMenu1 = $(this);
+					var countA = $itemMenu1.find(".itemMenuName.level1").length;
+					for(var i = 0;i<countA;i++){
+						setHref(i);
+					}
+					function setHref(count){
+						var len = $itemMenu1.children(".itemSubMenu.level1").eq(count).find(".itemMenu.level2>a").length;
+						//get url and add to view more
+						if(len>=8){
+							var tmpHref = $itemMenu1.find("a.itemMenuName.level1").eq(count).attr("href");
+							$itemMenu1.find(".itemMenu.level2").eq(count).append("<p><a class='viewmore' href='"+tmpHref+"'>view more</a></p>");
+						}
+					}
+				});
+				/*
+				*set menu item hide
+				*/
+				$(".itemSubMenu").each(function(){
+					$(this).find(".itemMenu>a.itemMenuName:gt(7)").css({'display':'none'}).remove();
+				});
+			});
+	</script>
+</div>
