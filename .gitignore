@@ -1,0 +1,12 @@
+/downloader/*.cfg
+/media/
+/var/cache/
+/var/session/
+/var/report/
+/var/log/
+/.idea/
+/app/etc/local.xml/
+index.php
+robots.txt
+sitemap.xml
+.htaccess
