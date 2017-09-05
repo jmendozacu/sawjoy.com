@@ -36,7 +36,7 @@
     
 }
 
-.nav_vmegamenu div.megamenu .level-top { position: relative;height:40px;background-color: rgba(231, 231, 231, 0.3);}
+.nav_vmegamenu div.megamenu .level-top { position: relative;height:40px;}
 .nav_vmegamenu div.megamenu .hot,
 .nav_vmegamenu div.megamenu .new {
   display: none;
@@ -95,11 +95,9 @@
     top: 0;
     left: 100% !important;
     border: 1px solid #f0f0f0;
-    /*margin: 0 0 0 20px;*/
-    /*box-shadow: 1px 1px 1px 1px #eee;*/
-    border-top: 0;
+    margin: 0 0 0 20px;
+    box-shadow: 1px 1px 1px 1px #eee;
     width: 935px;
-	min-height:281px!important;
 }
 .dropdownHide{display:none!important;}
 .dropdownShow{display:block!important;}

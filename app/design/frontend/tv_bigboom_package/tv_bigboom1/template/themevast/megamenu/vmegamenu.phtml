@@ -11,8 +11,6 @@
             </div>
         </div>
 		<!-- add by jerry,05/22-->
-		<div id="vmegamenu-background"></div>
-		<div id="vmegamenu-mask"></div>
     </div>
     <script type="text/javascript">
         //<![CDATA[
@@ -22,58 +20,6 @@
     </script>
 	<script type="text/javascript">
 			//add by jerry
-			/*
-			*set .dropdown top
-			*/
-			;jQuery(document).ready(function($){
-				$("#vmegamenu-background").css('height','282px');
-				(function(){
-					jQuery(".vmegamenu-contain .megamenu").each(function(){
-						var tmpMindex = $(this).index();
-						var tmpHeight = 40;
-						$(this).find(".dropdown").css('top',-tmpMindex*tmpHeight+'px');
-					});
-				})();
-			});
-			/*
-			*get back height
-			*/
-			jQuery(document).ready(function($){
-				$("#nav_vmegamenu .megamenu").find(".dropdown").removeClass("dropdownShow").addClass("dropdownHide");
-				$("#nav_vmegamenu").mouseout(function(){
-					$("#nav_vmegamenu .megamenu").find(".dropdownShow").addClass("dropdownHide").removeClass("dropdownShow");
-				});
-				get_back_Height();
-				function get_back_Height(){
-					var tmpH1 = $(".vmegamenu-contain").height();
-					jQuery(".dropdown").css("min-height",tmpH1+'px');
-					var tmpH2 = 0;
-					$("#nav_vmegamenu").on("mouseover",".megamenu",function(){
-						var tmpIndex = $(this).index();
-						//set other dropdown css display:none;
-						$("#nav_vmegamenu .megamenu").eq(tmpIndex).find(".dropdown").removeClass("dropdownHide").addClass("dropdownShow").end()
-							.siblings().find(".dropdown").addClass("dropdownHide").removeClass("dropdownShow");
-							
-						tmpH2 = $(".dropdownShow").height();
-						var tmpHeight = tmpH1>tmpH2?tmpH1:tmpH2;
-						$("#vmegamenu-background").css('height',(tmpHeight+1)+'px');
-					});
-				}
-			});
-			/*
-			*set back,mask left,width
-			*/
-			jQuery(document).ready(function($){
-				set_back_left_width();
-				$(window).resize(function () {
-					set_back_left_width();
-				});
-				function set_back_left_width(){
-					var tmp_vmegameny_width = $(document).width();//May IE show the bug
-					var tmp_vmegameny_left = -$(".nav-vcontainer").offset().left;
-					jQuery("#vmegamenu-background,#vmegamenu-mask").css({'left':tmp_vmegameny_left+'px','width':tmp_vmegameny_width+'px'});
-				}
-			});
 			jQuery(document).ready(function($){
 				/*
 				*set viewmore
