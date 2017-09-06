@@ -5,44 +5,76 @@ $skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 
 <!--img src="<?php //echo $this->getSkinUrl('images/home/bestseller.jpg');?>" />-->
 <!--best sellers begin-->
-<div class="seller-Box clearfix">
-	<div class="seller-Head">
-		<h3>Best Sellers</h3>
+<style type="text/css">
+    .brand-box .box-content{border: 1px solid #dfdfdf;padding: 20px;margin-top: 30px;}
+    .brand-box .box-content.brand-one{margin-top: 18px;}
+    .brand-box .block-image,.brand-box .block-content-right{float: left;}
+    .brand-box .block-image{width: 58%;}
+    .brand-box .block-content-right{width: 42%;padding-left: 30px;padding-top: 30px;}
+    .brand-box .products-textlink{margin-top: 25px;padding: 0;}
+    .brand-box .products-textlink .product-name a{font-size: 16px;}
+    .brand-box .products-textlink .special-price .price{font-size: 18px;font-weight: bold;color: #da3838;}
+    .brand-box .products-textlink .old-price .price{font-size: 16px;}
+    .count-down-time {
+        background-color: #e6e6e6;
+        float: left;
+        line-height: 31px;
+        padding: 0 10px;
+        margin-top: 60px;
+    }
+    .count-down-time .icon-clock {background: rgba(0, 0, 0, 0) url("http://alothemes.com/demo/supermarket/skin/frontend/alosupermarket/default/images/alothemes/icon-clock.png") no-repeat scroll center center;display: inline-block;height: 20px;text-indent: -999em;vertical-align: middle;width: 18px;margin-right: 10px;}
+    .countdown{margin: 0 auto;text-align: center;display: inline-block;vertical-align: middle;line-height: normal;}
+    .timer-box{padding: 0px 10px;margin: 0px;float: left;position: relative;line-height: normal;}
+    .timer-box:first-child{padding-left: 0;}
+    .timer-box:after{background: #333;height: 1px;width: 4px;content: "";display: inline-block;position: absolute;top: 50%;margin-left: 8px;}
+    .timer-box:last-child:after{display: none;}
+    .timer-box span{font-size: 14px;}
+    .timer-box span b {line-height: 18px;color: #da3838;}
+    .timer-box span.title{text-transform: uppercase;color: #333;padding-left: 2px;}
+    .box-content .block-content-right .shop-now {
+        margin-top: 60px;
+        line-height: 31px;
+        background-color: #ff8400;
+        color: #fff;
+        padding: 0 14px;
+        display: inline-block;
+        font-size: 14px;
+        text-transform: uppercase;
+        float: left;
+        font-weight: bold;
+        border-radius: 0 2px 2px 0;
+    }
+</style>
+<div class="brand-box clearfix">
+	<div class="bx-title">
+		<h2>Best Sellers</h2>
 	</div>
-	<div class="seller-Main row clearfix">
-		<div class="col-xs-12 col-lg-7 col-md-7 hidden-xs">
-			<div class="seller-L1 left">
-			<a href="<?php echo $webUrl."for-oneplus-x-lcd-white.html"?>">
-				<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L1.jpg" alt="">
-				<i class="imgText">LCD</i>
-			</a>
-			</div>
-			<div class="seller-L2 left">
-				<a href="<?php echo $webUrl."g-sp-samsung-s8-plus-super-glass-gold.html"?>">
-					<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L2.jpg" alt="">
-					<i class="imgText">Glass</i>
-				</a>
-			</div>
-		</div>
-		<div class="col-xs-12 col-lg-5 col-md-5">
-			<div class="seller-L3">
-				<a href="<?php echo $webUrl."iphone-6-wifi-ic.html"?>">
-					<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L31.jpg" alt="">
-					<i class="imgText it1">IC</i>
-				</a>
-				<a href="<?php echo $webUrl."g-sp-leather-case-with-wallet-for-iphone-7.html"?>">
-					<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L32.jpg" alt="">
-					<i class="imgText it2">Case</i>
-				</a>
-				<a href="<?php echo $webUrl."iphone-6-original-battery.html"?>">
-					<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L33.jpg" alt="">
-					<i class="imgText it3">Battery</i>
-				</a>
-				<a href="<?php echo $webUrl."samsung-sm-g930f-s7-charge-flex.html"?>">
-					<img src="<?php echo $skinUrl?>/frontend/tv_bigboom_package/tv_bigboom1/images/new_add/seller/seller-L34.jpg" alt="">
-					<i class="imgText it4">Flex</i>
-				</a>
-			</div>
-		</div>
+	<div class="container clearfix">
+        <div class="box-content brand-one clearfix">
+            <div class="block-image">
+                <img class="img-responsive" src="http://alothemes.com/demo/supermarket/media/wysiwyg/alothemes/static/demo1/brand-sale1.jpg" alt="Brand Sale">
+            </div>
+            <div class="block-content-right">
+                <img class="img-responsive brand-logo" src="http://alothemes.com/demo/supermarket/media/wysiwyg/alothemes/static/demo1/logo-brand1.png" alt="Brand Sale">
+                <div class="products-textlink clearfix">
+                    <h2 class="product-name">
+                        <a title="Sony Bravia Triluminos8" href="#">Sony Bravia Triluminos8</a>
+                    </h2>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price">$250.00 </span>
+                        </p>
+                        <p class="special-price">
+                            <span class="price">$200.00</span>
+                        </p>
+                    </div>
+                    <div class="alo-count-down count-down-time">
+                        <span class="icon-clock"><span class="hidden">hidden</span></span>
+                        <div class="countdown caption" data-timer="11/30/2019"><div class="timer-box"><span class="day"><b>814</b></span><span class="title">Days</span></div><div class="timer-box"><span class="hour"><b>06</b></span><span class="title">Hrs</span></div><div class="timer-box"><span class="min"><b>33</b></span><span class="title">Mins</span></div><div class="timer-box"><span class="sec"><b>53</b></span><span class="title">Secs</span></div></div>
+                    </div>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+        </div>
 	</div>
 </div>
