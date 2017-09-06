@@ -103,7 +103,9 @@ class Mivec_Shipping_Model_Rate_Express extends Mage_Shipping_Model_Carrier_Abst
 		//get shipping quote
 		$_quoteCollection = $this->_quoteExpress->getShippingCollection()
 			->addAttributeToFilter('carrier_id' , $_carrier['id'])
-			->addAttributeToFilter('country_id' , $_countryData['id']);
+			->addAttributeToFilter('country_id' , $_countryData['id'])
+            ->setOrder("id" , "DESC");
+
 		$_quoteData = $_quoteCollection->getItems();
 		//print_r($_quoteData);exit;
 

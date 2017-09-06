@@ -24,7 +24,7 @@ class Mivec_Ship_Block_Adminhtml_Airmail_Grid extends Mage_Adminhtml_Block_Widge
 			'header'    => 'ID',
 			'align'     =>'right',
 			'width'     => '50px',
-			'index'     => 'carrier_id',
+			'index'     => 'id',
 		));
 		//carrier
 		$_carriers = Mage::helper('ship/carrier')->getCarriers(array('type') , array('airmail'));
