@@ -109,7 +109,7 @@ dt, dd { line-height: 25px; }
 }
 .main-wrapper { background: #f2f2f2 url(../images/bg-main-wrapper.png) 0 0 repeat-x;}
 .checkout-onepage-index .main-wrapper {background:#ffffff;}
-.cms-index-index .main-wrapper { background: #f2f2f2;}
+.cms-index-index .main-wrapper { background: #ffffff;}
 .main { margin: 0 auto; min-height: 400px; /*padding: 40px 0;*/padding:40px 0 0 0; text-align: left;}
 .catalog-category-view .main,.catalog-product-view .main, .blog-index-list .main{padding-top: 10px;}
 .blog-index-list .main .nav-vcontainer{margin-top:-50px;}

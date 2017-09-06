@@ -17,6 +17,12 @@ $helpLabels = $this->helper('themevast/labels');
     /*btn*/
     .featuredproduct .bx-wrapper .bx-controls-direction a{top:50%;margin: 0;}
     .featuredproduct .bx-wrapper .bx-controls-direction a.bx-prev{left:0;}
+    .div-tabs>a{display: none;}
+    .div-tabs>a.active{display: block;}
+    .ul-tabs > li{position: relative;}
+    .ul-tabs > li.active > a:before {
+        background-color: #0a6680;top: 50%;content: "";display: block;height: 10px;left: -5px;margin: 0;position: absolute;right: 0;transform: rotate(-45deg);-moz-transform: rotate(-45deg);-webkit-transform: rotate(-45deg);-o-transform: rotate(-45deg);width: 10px;
+    }
 </style>
 <div class="featuredproduct">
 	<?php echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
@@ -138,10 +144,54 @@ $helpLabels = $this->helper('themevast/labels');
                         $(this).addClass("active").siblings().removeClass("active");
                         var tmpIndex = $(this).index();
                         $(".featuredproduct .featuredBox").eq(tmpIndex).addClass("active").siblings().removeClass("active");
-                    }else {return;}
+                    }else {
+                        return;
+                    }
                 });
 			});
 		</script>
 	<?php endif ?>
 </div>
+<p>Can u add a new block for smartphone in xml</p>
+<!--smartphone begin-->
+<div class="container">
+    <div class="bx-title"><h2>smartphone</h2></div>
+    <div class="row" style="background: #fff;">
+        <div class="col-md-3 col-sm-3">
+            <a href="#" style="display: block;height:600px;border:1px solid #e5e5e5;">
+                <img src="test.jpg" alt="img">
+            </a>
+        </div>
+        <div class="col-md-9 col-sm-3">
+            <div class="div-tabs f-left" style="width:80.6%;">
+                <a class="active" href="#" style="height:600px;border:1px solid #e5e5e5;">
+                    <img src="test.jpg" alt="img111">
+                </a>
+                <a href="#" style="height:600px;border:1px solid #e5e5e5;">
+                    <img src="test.jpg" alt="img222">
+                </a>
+                <a href="#" style="height:600px;border:1px solid #e5e5e5;">
+                    <img src="test.jpg" alt="img333">
+                </a>
+            </div>
+            <ul class="ul-tabs f-right" style="width:19.4%;">
+                <li class="active"><a href="javascript:void(0)" style="display:block;height:200px;border: 1px solid #0a6680;"><img src="test.jpg" alt="img"></a></li>
+                <li><a href="javascript:void(0)" style="display:block;height:200px;border: 1px solid #0a6680;"><img src="test.jpg" alt="img"></a></li>
+                <li><a href="javascript:void(0)" style="display:block;height:200px;border: 1px solid #0a6680;"><img src="test.jpg" alt="img"></a></li>
+            </ul>
+            <script type="text/javascript">
+                jQuery(document).ready(function($){
+                    $(".ul-tabs li").click(function(){
+                        if(!$(this).hasClass("active")){
+                            var tmpIndex = $(this).index();
+                            $(this).addClass("active").siblings().removeClass("active")
+                                .parent().parent().find(".div-tabs>a").eq(tmpIndex).addClass("active").siblings().removeClass("active");
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<!--smartphone finish-->
 <?php ?>
