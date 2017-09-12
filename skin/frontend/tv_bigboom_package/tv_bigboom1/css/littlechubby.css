@@ -193,8 +193,8 @@
 	.searchautocomplete .searchautocomplete-placeholder{left:0;min-width:initial;max-width:initial;}
 }
 @media (min-width: 1200px){
-	#tv-inivoslider{height:300px!important;height:300px!important\9}/*set height of slide*/
-	#tv-inivoslider .nivo-main-image{height:300px!important;}
+	#tv-inivoslider{height:352px!important;height:300px!important\9}/*set height of slide*/
+	#tv-inivoslider .nivo-main-image{height:352px!important;}
 	.home-content .products-grid>li{float:left;}
 	.featuredproduct .box-images a>img{width:156px;height:156px;}
 	.dealproducts .box-images a>img{width:190px;height:190px;}

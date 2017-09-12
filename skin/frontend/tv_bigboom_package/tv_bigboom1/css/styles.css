@@ -28,7 +28,10 @@
 * { margin:0; padding:0; }
 
 body          {  font:13px/1.55 Raleway; color:#333; text-align: left; background: #fff;}
-
+*, body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-size: 13px;
+    font-family: Lato;
+}
 img           { border:0; vertical-align:top; max-width: 100%; height: auto;}
 
 a             { color:#aaa; text-decoration: none; }
