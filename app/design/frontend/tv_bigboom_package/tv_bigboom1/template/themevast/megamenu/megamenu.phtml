@@ -39,7 +39,10 @@ $className = Mage::getConfig()->getBlockClassName('megamenu/megamenu');
                  ?>
                 </div>
             </div>
+            <?*/?>
+
             <?php echo $megamenu->drawMegamenuExtra(); ?>
+
             <div class="megamenu nav_product nav_saleproduct">
                 <div class="level-top"><a href="<?php echo $this->getUrl('saleproduct')?>"><span><?php echo $this->__('clearance') ?></span><i class="fa fa-angle-down"></i></a></div>
                 <div class="dropdown">
@@ -49,7 +52,7 @@ $className = Mage::getConfig()->getBlockClassName('megamenu/megamenu');
                  ?>
                 </div>
             </div>
-            <?php */?>
+            <?php ?>
             <?php echo $megamenu->drawMegamenuLink(); ?>
         </div>
     <script type="text/javascript">

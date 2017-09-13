@@ -35,6 +35,14 @@
 ?>
                     
 <header class="header-wrapper">
+    <div id="header-special-offer">
+        <div class="container">
+            <div class="promotion">
+                <span class="header-special-offer-close"><i class="fa fa-times"></i></span>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('promotion')->toHtml() ?>
+            </div>
+        </div>
+    </div>
     <div class="header-quick-access">
         <div class="container">
             <div class="row">
