@@ -1,17 +1,55 @@
 <?php
-
 if(!$this->getConfig('enabled')) return;
+//$_productCollection=$this->getProductCollection();
 
-$_productCollection=$this->getProductCollection();
 $_helper = $this->helper('catalog/output');
 $helpLabels = $this->helper('themevast/labels');
-?>
+$_featureImgUrl = Mage::getBaseUrl();
 
+?>
+<style>
+    /*title*/
+    .featuredproduct .bx-title .f-right{border-width: 1px 1px 1px 1px;border-style: solid;border-color: #dfdfdf;}
+    .featuredproduct .bx-title .f-right li{display: inline-block;float: left;padding: 0 15px;font-size: 14px;line-height: 40px;text-transform: uppercase;cursor: pointer;}
+    .featuredproduct .bx-title .f-right li:hover{color: #ffffff;background-color: #ff8400;}
+    .featuredproduct .bx-title .f-right li.active{color: #ffffff;background-color: #ff8400;cursor: default;}
+    /*featureBox*/
+    .featuredproduct .featuredBox{display: none;}
+    .featuredproduct .featuredBox.active{display: block;}
+    /*btn*/
+    .featuredproduct .bx-wrapper .bx-controls-direction a{top:50%;margin: 0;}
+    .featuredproduct .bx-wrapper .bx-controls-direction a.bx-prev{left:0;}
+    .div-tabs>a{display: none;}
+    .div-tabs>a.active{display: block;}
+    .ul-tabs > li{position: relative;display: block;height: 196px;border-bottom: 1px solid #dfdfdf;}
+    .ul-tabs > li > a{padding:13px;}
+    .ul-tabs > li:last-child {border-bottom: 0;}
+    .ul-tabs > li.active > a:before {background-color: #fff;top: 50%;content: "";display: block;height: 10px;left: -5px;margin: 0;position: absolute;right: 0;transform: rotate(-45deg);-moz-transform: rotate(-45deg);-webkit-transform: rotate(-45deg);-o-transform: rotate(-45deg);width: 10px;}
+    .img-responsive {display: block;height: auto;max-width: 100%;}
+</style>
 <div class="featuredproduct">
-	<?php echo $this->getConfig('title') ? '<div class="bx-title featured-title"><h2>' .$this->getConfig('title'). '</h2></div>' : '';
-	if(!$_productCollection->count()): ?> 
-		<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
-	<?php else: ?>
+	<?php
+    /*echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
+        <h2 class="f-left" style="display: inline-block;">' .$this->getConfig('title'). '</h2>
+        <!--add by jerry-->
+        <ul class="f-right">
+            <li class="active">Best Selling</li>
+            <li>New Arrival</li>
+            <li>Featured Product</li>
+        </ul>
+    </div>' : '';
+    */
+	?>
+    <div class="bx-title featured-title clearfix">
+        <h2 class="f-left" style="display: inline-block;"><?php echo $this->getConfig('title')?></h2>
+        <!--add by jerry-->
+        <ul class="f-right">
+            <li class="active">Best Selling</li>
+            <li>New Arrival</li>
+            <li>Featured Product</li>
+        </ul>
+    </div>
+
 	<?php
 		// getConfig
 		$widthImage  	= $this->getConfig('widthImage') ? $this->getConfig('widthImage') : 135;
@@ -28,6 +66,21 @@ $helpLabels = $this->helper('themevast/labels');
 	<?php if ($slide && $rows > 1): ?>
 	<div class="slide-multirows">
 	<?php endif ?>
+    <?php
+        //edit by mivec
+        $_categoresId = array(151 , 286 , 287);
+
+        $i=1;
+        foreach ($_categoresId as $_categoryId) :
+            $_category = Mage::getModel("catalog/category")->load($_categoryId);
+
+            $_productCollection = Mage::getModel("catalog/product")
+                ->getCollection()
+                ->addCategoryFilter($_category)
+                ->setPageSize(10)
+                ->setOrder("entity_id" , "DESC");
+        ?>
+    <div id="category-<?php echo $_categoryId;?>" class="featuredBox active">
 	<?php $_collectionSize = $_productCollection->count() ?>
 	<?php $_columnCount = $this->getColumnCount(); ?>
 	<?php $j=0; $time = $this->getConfig('playDelay'); ?>
@@ -42,7 +95,7 @@ $helpLabels = $this->helper('themevast/labels');
 			<div class="box-images">
 			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
 			<?php $imagehv = $_product->load('media_gallery')->getMediaGalleryImages()->getItemByColumnValue('position','2');
-				if($imagehv) : 
+				if($imagehv) :
 				$imagehv = $imagehv->getFile();
 				?>
 				<img class="img-face-back" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image', $imagehv)->resize($widthImage, $heightImage) ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
@@ -68,7 +121,7 @@ $helpLabels = $this->helper('themevast/labels');
 							<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
 						<?php endif; ?>
 					<?php endif; ?>
-					
+
 					<?php if($compare || $wishlist): ?>
 						<ul class="add-to-links">
 							<?php if($compare): ?>
@@ -92,30 +145,88 @@ $helpLabels = $this->helper('themevast/labels');
 	</ul>
 	<?php endif ?>
 	<?php endforeach ?>
+    </div>
+    <?php
+        $i++;
+        endforeach;
+    ?>
+
 	<?php if ($slide && $rows > 1): ?>
 	</div>
 	<?php endif ?>
-	<?php endif ?>
+
 	<?php if($slide) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
 				(function(selector){
 					var $content = $(selector);
 					var $slider  = $('<?php echo $class ?>', $content);
+					return;
 					var slider 	 = $slider.bxSlider({
 						<?php echo $this->setBxslider() ?>
 						//infiniteLoop: false,
 						moveSlides:1,
-						slideMargin: 10,
+						//slideMargin: 10,
 						autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
 					})
-		
+
 				})(".featuredproduct");
+				//new add by jerry at 2017/09/05 18:13
+                $(".featuredproduct .bx-title .f-right li").click(function(){
+                    if(!$(this).hasClass("active")){
+                        $(this).addClass("active").siblings().removeClass("active");
+                        var tmpIndex = $(this).index();
+                        $(".featuredproduct .featuredBox").eq(tmpIndex).addClass("active").siblings().removeClass("active");
+                    }else {
+                        return;
+                    }
+                });
 			});
 		</script>
 	<?php endif ?>
 </div>
 
-
-
-
+<!--smartphone begin-->
+<div class="container">
+    <div class="bx-title"><h2>smartphone</h2></div>
+    <div class="row" style="background: #fff;">
+        <div class="col-md-3 col-sm-3">
+            <a href="#" style="display: block;height:590px;">
+                <img class="img-responsive" src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\bl.jpg'?>" alt="">
+            </a>
+        </div>
+        <div class="col-md-9 col-sm-3">
+            <div style="border-color: #dfdfdf;border-style: solid;border-width: 1px;" class="clearfix">
+                <div class="div-tabs f-left" style="width:80.6%;height:590px;">
+                    <a class="active" href="#">
+                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br1.jpg'?>" alt="br1">
+                    </a>
+                    <a href="#">
+                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br2.jpg'?>" alt="br2">
+                    </a>
+                    <a href="#">
+                        <img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\br3.jpg'?>" alt="br3">
+                    </a>
+                </div>
+                <ul class="ul-tabs f-right" style="width:19.4%;">
+                    <li class="active"><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\one1.jpg'?>" alt="one"></a></li>
+                    <li><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\two1.jpg'?>" alt="two"></a></li>
+                    <li><a href="javascript:void(0)"><img src="<?php echo $_featureImgUrl.'\skin\frontend\tv_bigboom_package\tv_bigboom1\images\mivec\three1.jpg'?>" alt="three"></a></li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                jQuery(document).ready(function($){
+                    $(".ul-tabs li").click(function(){
+                        if(!$(this).hasClass("active")){
+                            var tmpIndex = $(this).index();
+                            $(this).addClass("active").siblings().removeClass("active")
+                                .parent().parent().find(".div-tabs>a").eq(tmpIndex).addClass("active").siblings().removeClass("active");
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<!--smartphone finish-->
+<?php ?>

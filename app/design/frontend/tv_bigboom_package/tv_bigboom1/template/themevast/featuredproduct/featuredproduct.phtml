@@ -1,10 +1,11 @@
 <?php
 if(!$this->getConfig('enabled')) return;
+//$_productCollection=$this->getProductCollection();
 
-$_productCollection=$this->getProductCollection();
 $_helper = $this->helper('catalog/output');
 $helpLabels = $this->helper('themevast/labels');
 $_featureImgUrl = Mage::getBaseUrl();
+
 ?>
 <style>
     /*title*/
@@ -27,16 +28,28 @@ $_featureImgUrl = Mage::getBaseUrl();
     .img-responsive {display: block;height: auto;max-width: 100%;}
 </style>
 <div class="featuredproduct">
-	<?php echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
+	<?php
+    /*echo $this->getConfig('title') ? '<div class="bx-title featured-title clearfix">
         <h2 class="f-left" style="display: inline-block;">' .$this->getConfig('title'). '</h2>
         <!--add by jerry-->
         <ul class="f-right">
-            <li class="active">Smart phone</li><li>accessories</li><li>silicon case</li>
+            <li class="active">Best Selling</li>
+            <li>New Arrival</li>
+            <li>Featured Product</li>
         </ul>
     </div>' : '';
-	if(!$_productCollection->count()): ?> 
-		<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
-	<?php else: ?>
+    */
+	?>
+    <div class="bx-title featured-title clearfix">
+        <h2 class="f-left" style="display: inline-block;"><?php echo $this->getConfig('title')?></h2>
+        <!--add by jerry-->
+        <ul class="f-right">
+            <li class="active">Best Selling</li>
+            <li>New Arrival</li>
+            <li>Featured Product</li>
+        </ul>
+    </div>
+
 	<?php
 		// getConfig
 		$widthImage  	= $this->getConfig('widthImage') ? $this->getConfig('widthImage') : 135;
@@ -53,7 +66,28 @@ $_featureImgUrl = Mage::getBaseUrl();
 	<?php if ($slide && $rows > 1): ?>
 	<div class="slide-multirows">
 	<?php endif ?>
-    <div class="featuredBox active">
+    <?php
+        //edit by mivec
+        $_categoresId = array(151 , 286 , 287);
+
+        $_status = "";
+        $_count=1;
+        foreach ($_categoresId as $_categoryId) :
+            $_category = Mage::getModel("catalog/category")->load($_categoryId);
+
+            $_productCollection = Mage::getModel("catalog/product")
+                ->getCollection()
+                ->addCategoryFilter($_category)
+                ->setPageSize(10)
+                ->setOrder("entity_id" , "DESC");
+            //echo $_count . "</p>";
+            if ($_count==1) {
+                $_status = "active";
+            } else {
+                $_status = "";
+            }
+        ?>
+    <div id="category-<?php echo $_categoryId;?>" class="featuredBox <?php echo $_status?>">
 	<?php $_collectionSize = $_productCollection->count() ?>
 	<?php $_columnCount = $this->getColumnCount(); ?>
 	<?php $j=0; $time = $this->getConfig('playDelay'); ?>
@@ -119,12 +153,12 @@ $_featureImgUrl = Mage::getBaseUrl();
 	<?php endif ?>
 	<?php endforeach ?>
     </div>
-    <div class="featuredBox" style="height:300px;background: #464d50;"></div>
-    <div class="featuredBox" style="height: 300px;background: #321455;"></div>
+    <?php $_count++;endforeach;?>
+
 	<?php if ($slide && $rows > 1): ?>
 	</div>
 	<?php endif ?>
-	<?php endif ?>
+
 	<?php if($slide) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
@@ -154,10 +188,10 @@ $_featureImgUrl = Mage::getBaseUrl();
 		</script>
 	<?php endif ?>
 </div>
-<p>Can u add a new block for smartphone in xml</p>
+
 <!--smartphone begin-->
 <div class="container">
-    <div class="bx-title"><h2>smartphone</h2></div>
+    <!--div class="bx-title"><h2>smartphone</h2></div-->
     <div class="row" style="background: #fff;">
         <div class="col-md-3 col-sm-3">
             <a href="#" style="display: block;height:590px;">

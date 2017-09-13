@@ -1,5 +1,5 @@
 /downloader/*.cfg
-/media/
+/media/catalog/
 /var/cache/
 /var/session/
 /var/report/

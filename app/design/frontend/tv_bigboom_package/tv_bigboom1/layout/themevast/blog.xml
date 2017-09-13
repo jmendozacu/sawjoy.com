@@ -43,7 +43,9 @@
                 <action method="setTemplate"><template>themevast/blog/blog_slide.phtml</template></action>
 		
             </block>-->
-	    <block type="blog/side" name="blog.slider" template="themevast/blog/blog_slider.phtml"/>
+
+            <!-- disable by mivec-->
+	    <!--block type="blog/side" name="blog.slider" template="themevast/blog/blog_slider.phtml"/-->
         </reference>
     </cms_index_index>
 

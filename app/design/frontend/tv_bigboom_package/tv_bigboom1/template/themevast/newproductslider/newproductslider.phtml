@@ -47,7 +47,7 @@ $skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
 </style>
 <div class="brand-box clearfix">
 	<div class="bx-title">
-		<h2>Best Sellers</h2>
+		<h2>Promotions</h2>
 	</div>
 	<div class="container clearfix">
         <div class="box-content brand-one clearfix">
@@ -76,5 +76,154 @@ $skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
                 </div>
             </div>
         </div>
+
+        <div class="box-content brand-two clearfix">
+            <div class="block-image">
+                <img class="img-responsive" src="http://alothemes.com/demo/supermarket/media/wysiwyg/alothemes/static/demo1/brand-sale2.jpg" alt="Brand Sale">
+            </div>
+            <div class="block-content-right">
+                <img class="img-responsive brand-logo" src="http://alothemes.com/demo/supermarket/media/wysiwyg/alothemes/static/demo1/logo-brand2.png" alt="Brand Sale">
+                <div class="products-textlink clearfix">
+                    <h2 class="product-name">
+                        <a title="Sony Bravia Triluminos8" href="#">Electroluxs Smartboost Premixes</a>
+                    </h2>
+                    <div class="price-box">
+                        <p class="old-price">
+                            <span class="price">$168.00 </span>
+                        </p>
+                        <p class="special-price">
+                            <span class="price">$150.00</span>
+                        </p>
+                    </div>
+                    <div class="alo-count-down count-down-time">
+                        <span class="icon-clock"><span class="hidden">hidden</span></span>
+                        <div class="countdown caption" data-timer="2/25/2018"><div class="timer-box"><span class="day"><b>164</b></span><span class="title">Days</span></div><div class="timer-box"><span class="hour"><b>12</b></span><span class="title">Hrs</span></div><div class="timer-box"><span class="min"><b>46</b></span><span class="title">Mins</span></div><div class="timer-box"><span class="sec"><b>12</b></span><span class="title">Secs</span></div></div>
+                    </div>
+                    <a href="#" class="shop-now">Shop Now</a>
+                </div>
+            </div>
+        </div>
 	</div>
+</div>
+
+<!-- Promotions -->
+<?php
+//$_productCollection=$this->getProductCollection();
+
+$_category = Mage::getModel('catalog/category')->load(152);
+$_productCollection = Mage::getModel("catalog/product")
+    ->getCollection()
+    ->addCategoryFilter($_category)
+    ->setPageSize(10)
+    ->setOrder("entity_id" , "DESC");
+
+$_helper = $this->helper('catalog/output');
+$helpLabels = $this->helper('themevast/labels');
+?>
+<div class="newproductslider">
+    <?php //echo $this->getConfig('title') ? '<div class="bx-title bestseller-title"><h2>' .$this->getConfig('title'). '</h2></div>' : '';
+    if(!$_productCollection->count()): ?>
+        <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <?php else: ?>
+        <?php
+        // getConfig
+        $widthImage  	= $this->getConfig('widthImage') ? $this->getConfig('widthImage') : 135;
+        $heightImage 	= $this->getConfig('heightImage') ? $this->getConfig('heightImage') : 135;
+        $price   		= $this->getConfig('price');
+        $cart    		= $this->getConfig('cart');
+        $compare  		= $this->getConfig('compare');
+        $wishlist  		= $this->getConfig('wishlist');
+        $review  		= $this->getConfig('review');
+        $rows 			= $this->getConfig('rows');
+        $class 			= ($rows > 1) ? '.slide-multirows' : '.products-grid';
+        ?>
+        <?php if ($rows > 1): ?>
+            <div class="slide-multirows">
+        <?php endif ?>
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php $_columnCount = $this->getColumnCount(); ?>
+        <?php $j=0; $time = $this->getConfig('playDelay') ? $this->getConfig('playDelay') : 0; ?>
+        <?php $i=0; foreach ($_productCollection as $_product): ?>
+            <?php $t = $j*$time; $t .='ms'; $j++; ?>
+            <?php if ($i++%$_columnCount==0): ?>
+                <ul class="products-grid pdt-list zoomOut play">
+            <?php endif ?>
+            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> item-animate">
+                <div class="item-inner">
+                    <?php // Product Image ?>
+                    <div class="box-images">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                            <?php $imagehv = $_product->load('media_gallery')->getMediaGalleryImages()->getItemByColumnValue('position','2');
+                            if($imagehv) :
+                                $imagehv = $imagehv->getFile();
+                                ?>
+                                <img class="img-face-back" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image', $imagehv)->resize($widthImage, $heightImage); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                            <?php endif ?>
+                            <img class="img-face" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($widthImage, $heightImage); ?>"  alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+                        <a class="view-detail" <?php if(Mage::getStoreConfig('quickview/general/enabled')):?> id='fancybox<?php echo $_product->getId()?>'  href="<?php echo $this->getUrl('quickview/index/ajax',array('product_id'=>$_product->getId())); ?>"<?php else: ?> href="<?php echo $_product->getProductUrl() ?>" href="<?php echo $_product->getProductUrl() ?>" <?php endif ?> title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><i class="fa fa-search"></i></a>
+                        <?php // Product description ?>
+                    </div>
+                    <div class="product-shop">
+                        <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                        <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+                        <?php if($review): ?>
+                            <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                        <?php endif; ?>
+                        <?php if($price): ?>
+                            <?php echo $this->getPriceHtml($_product, true) ?>
+                        <?php endif; ?>
+                        <div class="actions">
+
+                            <?php if($cart): ?>
+                                <?php if($_product->isSaleable()): ?>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><i class="fa fa-shopping-cart"></i><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                <?php else: ?>
+                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
+                            <?php if($compare || $wishlist): ?>
+                                <ul class="add-to-links">
+                                    <?php if($compare): ?>
+                                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                            <li><a href="<?php echo $_compareUrl ?>" class="link-compare"><i class="fa fa-exchange"></i><?php //echo $this->__('Add to Compare') ?></a></li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if($wishlist): ?>
+                                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                            <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><i class="fa fa-heart"></i><?php //echo $this->__('Add to Wishlist') ?></a></li>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php echo $helpLabels->getLabels($_product); //Product labels ?>
+                </div>
+            </li>
+            <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+                </ul>
+            <?php endif ?>
+        <?php endforeach ?>
+        <?php if ($rows > 1): ?>
+            </div>
+        <?php endif ?>
+    <?php endif ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            (function(selector){
+                var $content = $(selector);
+                var $slider  = $('<?php echo $class ?>', $content);
+                var slider 	 = $slider.bxSlider({
+                    <?php echo $this->setBxslider() ?>
+                    //infiniteLoop: false,
+                    moveSlides:1,
+                    slideMargin: 10,
+                    autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
+                })
+
+            })(".bestsellerslider");
+        });
+    </script>
 </div>
