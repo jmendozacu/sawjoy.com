@@ -17,14 +17,13 @@ set_include_path(implode(PATH_SEPARATOR, array(
 //echo get_include_path();exit;
 
 require_once 'app/Mage.php';
+
+require_once 'Mivec/Db.php';
+require_once 'Mivec/Acl.php';
 require_once 'common.php';
 
 //order
 require_once 'order.common.php';
-
-//supplier
-//require_once 'supplier.common.php';
-//echo get_include_path();exit;
 
 // load PhpMailer lib
 require_once 'PhpMailer/class.phpmailer.php';

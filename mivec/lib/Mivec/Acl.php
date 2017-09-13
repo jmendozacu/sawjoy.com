@@ -10,9 +10,9 @@ class Mivec_Acl extends Mivec_Abstract {
 	
 	protected $_errorMsg = "Access Denied";
 	
-	public function __construct($_user , $_pass)
+	public function __construct(array $_dbConfig , $_user , $_pass)
 	{
-		self::_initDb();
+		self::_initDb($_dbConfig);
 		self::_initUser($_user , $_pass);
 	}
 	
@@ -68,13 +68,13 @@ class Mivec_Acl extends Mivec_Abstract {
 		}
 	}
 	
-	private function _initDb()
+	private function _initDb(array $_dbConfig)
 	{
 		$this->_table = array(
-			'user'	=> 'mivec_erp_user',
-			'role'	=> 'mivec_erp_user_role'
+			'user'	=> $_dbConfig['table']['user'],
+			'role'	=> $_dbConfig['table']['role']
 		);
-		
-		$this->_db = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$this->_db = $_dbConfig['adapter'];
+		//$this->_db = Mage::getSingleton('core/resource')->getConnection('core_read');
 	}
 }

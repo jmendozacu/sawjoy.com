@@ -35,7 +35,7 @@
 abstract class Mage_Sitemap_Model_Resource_Catalog_Abstract extends Mage_Core_Model_Resource_Db_Abstract
 {
     /**
-     * Collection Zend Db select
+     * Collection Zend Db.php select
      *
      * @var Zend_Db_Select
      */

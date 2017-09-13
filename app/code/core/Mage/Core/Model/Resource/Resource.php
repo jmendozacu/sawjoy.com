@@ -59,8 +59,8 @@ class Mage_Core_Model_Resource_Resource extends Mage_Core_Model_Resource_Db_Abst
 
     /**
      * Fill static versions arrays.
-     * This routine fetches Db and Data versions of at once to optimize sql requests. However, when upgrading, it's
-     * possible that 'data' column will be created only after all Db installs are passed. So $neededType contains
+     * This routine fetches Db.php and Data versions of at once to optimize sql requests. However, when upgrading, it's
+     * possible that 'data' column will be created only after all Db.php installs are passed. So $neededType contains
      * information on main purpose of calling this routine, and even when 'data' column is absent - it won't require
      * reissuing new sql just to get 'db' version of module.
      *
@@ -71,7 +71,7 @@ class Mage_Core_Model_Resource_Resource extends Mage_Core_Model_Resource_Db_Abst
     {
         if ((($needType == 'db') && is_null(self::$_versions))
             || (($needType == 'data') && is_null(self::$_dataVersions))) {
-            self::$_versions     = array(); // Db version column always exists
+            self::$_versions     = array(); // Db.php version column always exists
             self::$_dataVersions = null; // Data version array will be filled only if Data column exist
 
             if ($this->_getReadAdapter()->isTableExists($this->getMainTable())) {

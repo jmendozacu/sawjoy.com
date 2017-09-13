@@ -46,7 +46,7 @@ class Mage_Core_Helper_File_Storage_Database extends Mage_Core_Helper_Abstract
     protected $_resourceModel = null;
 
     /**
-     * Db usage flag
+     * Db.php usage flag
      *
      * @var bool
      */

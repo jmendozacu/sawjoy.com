@@ -32,14 +32,14 @@
 class Mage_Install_Block_Db_Type extends Mage_Core_Block_Template
 {
     /**
-     * Db title
+     * Db.php title
      *
      * @var string
      */
     protected $_title = null;
 
     /**
-     * Return Db title
+     * Return Db.php title
      *
      * @return string
      */
