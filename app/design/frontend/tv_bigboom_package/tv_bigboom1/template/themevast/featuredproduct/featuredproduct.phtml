@@ -9,13 +9,14 @@ $_featureImgUrl = Mage::getBaseUrl();
 ?>
 <style>
     /*title*/
+    .featuredproduct{padding-bottom: 307px;}
     .featuredproduct .bx-title .f-right{border-width: 1px 1px 1px 1px;border-style: solid;border-color: #dfdfdf;}
     .featuredproduct .bx-title .f-right li{display: inline-block;float: left;padding: 0 15px;font-size: 14px;line-height: 40px;text-transform: uppercase;cursor: pointer;}
     .featuredproduct .bx-title .f-right li:hover{color: #ffffff;background-color: #ff8400;}
     .featuredproduct .bx-title .f-right li.active{color: #ffffff;background-color: #ff8400;cursor: default;}
     /*featureBox*/
-    .featuredproduct .featuredBox{display: none;}
-    .featuredproduct .featuredBox.active{display: block;}
+    .featuredproduct .featuredBox{opacity:0;position: absolute;z-index: -1;left:15px;top:67px;max-width: 1170px;}
+    .featuredproduct .featuredBox.active{display: block;opacity: 1;z-index: 1;}
     /*btn*/
     .featuredproduct .bx-wrapper .bx-controls-direction a{top:50%;margin: 0;}
     .featuredproduct .bx-wrapper .bx-controls-direction a.bx-prev{left:0;}
@@ -162,18 +163,17 @@ $_featureImgUrl = Mage::getBaseUrl();
 	<?php if($slide) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				(function(selector){
-					var $content = $(selector);
-					var $slider  = $('<?php echo $class ?>', $content);
-					var slider 	 = $slider.bxSlider({
-						<?php echo $this->setBxslider() ?>
-						//infiniteLoop: false,
-						moveSlides:1,
-						//slideMargin: 10,
-						autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
-					})
-		
-				})(".featuredproduct");
+                (function(selector){
+                    var $content = $(selector);
+                    var $slider  = $('<?php echo $class ?>', $content);
+                    var slider 	 = $slider.bxSlider({
+                        <?php echo $this->setBxslider() ?>
+                        //infiniteLoop: false,
+                        moveSlides:1,
+                        //slideMargin: 10,
+                        autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
+                    })
+                })(".featuredproduct");
 				//new add by jerry at 2017/09/05 18:13
                 $(".featuredproduct .bx-title .f-right li").click(function(){
                     if(!$(this).hasClass("active")){

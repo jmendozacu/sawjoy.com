@@ -44,6 +44,8 @@ $skinUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);
         font-weight: bold;
         border-radius: 0 2px 2px 0;
     }
+    /*slide-multirows*/
+    .slide-multirows .products-grid>li{float: left; list-style: none; position: relative; width: 234px;}
 </style>
 <div class="brand-box clearfix">
 	<div class="bx-title">
@@ -210,20 +212,4 @@ $helpLabels = $this->helper('themevast/labels');
             </div>
         <?php endif ?>
     <?php endif ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function($){
-            (function(selector){
-                var $content = $(selector);
-                var $slider  = $('<?php echo $class ?>', $content);
-                var slider 	 = $slider.bxSlider({
-                    <?php echo $this->setBxslider() ?>
-                    //infiniteLoop: false,
-                    moveSlides:1,
-                    slideMargin: 10,
-                    autoHover: true, // stop while hover <=> slider.stopAuto(); + slider.startAuto();
-                })
-
-            })(".bestsellerslider");
-        });
-    </script>
 </div>
