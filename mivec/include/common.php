@@ -233,8 +233,8 @@ function createFCKeditor($value="",$name="content",$width="100%",$height=350,$to
 function convertToCount($sql)
 {
 	//split to get count
-	$rowsql = preg_replace('/SELECT (.*?) FROM/is','SELECT COUNT(*) FROM',$sql);
-	$rowsql = preg_replace('/(ORDER BY *.+\w+)/is','',$rowsql);
+	$rowsql = preg_replace('/SELECT\s+.*\sFROM/is','SELECT COUNT(*) FROM',$sql);
+	$rowsql = preg_replace('/ORDER*.+\w+/is','',$rowsql);
 	return $rowsql;
 }
 
