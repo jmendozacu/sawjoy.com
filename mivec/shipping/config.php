@@ -41,11 +41,6 @@ function getCarrierData($field = '' , $val = "")
 	if (!empty($field)) {
 		$sql .= " WHERE $field = ";
 		$sql .= intval($val) ? "$val" : "'$val'";
-		/*
-		$rs = $db->fetch($sql);
-		$data = array(
-			$rs['id']	=> $rs['carrier']
-		);*/
 	}
 	$sql .= " ORDER BY carrier_id DESC";
 	if ($row = $db->fetchAll($sql)) {
