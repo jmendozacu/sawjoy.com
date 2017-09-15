@@ -10,9 +10,9 @@ $id = $_GET['id'];
 $act = $_GET['act'];
 
 //forward
-//$_referer = urldecode($_GET['referer']);
-if ($_GET['referer']) {
-	$_SESSION['referer'] = urldecode($_GET['referer']);
+$_referer = "";
+if ($app->getRequest()->getParam('referer')) {
+    $_referer = urldecode($app->getRequest()->getParam('referer'));
 }
 
 $data = array();
@@ -27,7 +27,7 @@ if (!empty($id)) {
 
 if ($act == 'save') {
 	$_succeed = FALSE;
-	$data = $_POST;
+	$data = $_POST['data'];
 	
 	//根据ISO找country id
 	if (!$data['country_id']) {
@@ -48,12 +48,13 @@ if ($act == 'save') {
 			$_succeed = TRUE;
 		}
 	}
-	
-	if (!empty($id)) {
-		$_url = "?id=" . $id . "&succeed=" . $_succeed;
-	} else {
-		$_url = $_SESSION['referer'];
-	}
+
+    if (!empty($id)) {
+        $_url = "?id=" . $id . "&succeed=" . $_succeed
+            . "&referer=" . $_referer;
+    } else {
+        $_url = $_referer;
+    }
 	//echo $_url;
 	jsLocation("" , $_url);
 }
@@ -71,23 +72,23 @@ if ($act == 'save') {
     </tr>
     <tr>
         <td width="17%" height="30" bgcolor="#FFFFFF">Select Carrier</td>
-        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formSelect('carrier_id' , $_globalData['carrier'] , $row['carrier_id'])?></td>
+        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formSelect('data[carrier_id]' , $_globalData['carrier'] , $row['carrier_id'])?></td>
     </tr>
     <tr>
         <td width="17%" height="30" bgcolor="#FFFFFF">Select Country</td>
-        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formSelect('country_id' , $_globalData['country'] , $row['country_id'])?></td>
+        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formSelect('data[country_id]' , $_globalData['country'] , $row['country_id'])?></td>
     </tr>
     <tr>
         <td width="17%" height="30" bgcolor="#FFFFFF">Or Input Country Code</td>
-        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('iso' , $row['iso'])?></td>
+        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('data[iso]' , $row['iso'])?></td>
     </tr>
     <tr>
         <td width="17%" height="30" bgcolor="#FFFFFF">Price</td>
-        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('quote' , $row['quote'])?><span class="required">* CNY</span></td>
+        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('data[quote]' , $row['quote'])?><span class="required">* CNY</span></td>
     </tr>
     <tr>
         <td width="17%" height="30" bgcolor="#FFFFFF">Tracking Number Fee</td>
-        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('tracking_no' , $row['tracking_no'])?><span class="required">* CNY</span></td>
+        <td width="83%" height="30" bgcolor="#FFFFFF"><?php echo formText('data[tracking_no]' , $row['tracking_no'])?><span class="required">* CNY</span></td>
     </tr>
     <?php if (!empty($id)) :?>
     <tr>
@@ -97,10 +98,11 @@ if ($act == 'save') {
     <?php endif;?>
     <tr bgcolor="#F0FFF0">
         <td height="30" colspan="2">
-        <button id="submit" type="submit" class="button btn-cart"> <span><span>Save</span></span></button>
-        <button id="forward" type="button" onclick="window.location.href='data_airmail.php'" class="button btn-cart">
-          <span><span>Back</span></span>
-        </button>
+            <input type="hidden" name="referer" value="<?php echo urlencode($_referer)?>" />
+            <button id="submit" type="submit" class="button btn-cart"><span><span>Save</span></span></button>
+            <button id="forward" type="button" onclick="window.location.href='<?php echo $_referer;?>'" class="button btn-cart">
+                <span><span>Back</span></span>
+            </button>
         </td>
     </tr>
 </table>
