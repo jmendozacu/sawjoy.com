@@ -10,12 +10,9 @@ $id = $_GET['id'];
 $act = $_GET['act'];
 
 //forward
-//$_referer = urldecode($_GET['referer']);
 if ($_GET['referer']) {
 	$_SESSION['referer'] = urldecode($_GET['referer']);
 }
-//echo $_referer;
-//print_r($_COOKIE);
 
 $data = array();
 if (!empty($id)) {
@@ -54,7 +51,7 @@ if ($act == 'save') {
 	if (!empty($id)) {
 		$_url = "?id=" . $id . "&succeed=" . $_succeed;
 	} else {
-		$_url = $_COOKIE['referer'];
+		$_url = $_SESSION['referer'];
 	}
 	//echo $_url;
 	jsLocation("" , $_url);
@@ -99,8 +96,8 @@ if ($act == 'save') {
     <?php endif;?>
     <tr bgcolor="#F0FFF0">
         <td height="30" colspan="2">
-        <button id="submit" type="submit" class="button btn-cart"> <span><span>Save</span></span></button>
-        <button id="forward" type="button" onclick="window.location.href='<?php echo $_SESSION['referer']?>'" class="button btn-cart">
+        <button id="submit" type="submit" class="button btn-cart"><span><span>Save</span></span></button>
+        <button id="forward" type="button" onclick="window.location.href='data_express.php'" class="button btn-cart">
           <span><span>Back</span></span>
         </button>
         </td>
