@@ -3368,7 +3368,8 @@ background: url(../images/new_add/seller/it_04.png) center center no-repeat\9;		
           color: #b0d95e;
           text-decoration: underline; }
 		  
-.kind-Slide{width:60%;height:550px;overflow: hidden;
+.kind-Slide{
+      height:550px;overflow: hidden;
       box-sizing: border-box;
       border: 1px solid #e8e8e8;
       border-top: none;
