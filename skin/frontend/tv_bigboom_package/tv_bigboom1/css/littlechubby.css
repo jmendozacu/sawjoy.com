@@ -45,7 +45,7 @@
 	.navbar .btn-navbar{margin:4px 10px 0 0;}
 	#tv-inivoslider{height:160px!important;}/*set height of slide*/
 	#tv-inivoslider .nivo-main-image{height:160px!important;}
-	.home-content .products-grid>li{/*width:145px!important;*/margin:0!important;}/*set featuredproduct*/
+	.home-content .products-grid>li{width:145px!important;margin:0!important;}/*set featuredproduct*/
 	.icon-new, .icon-sale{right:0;}
 	.searchautocomplete .searchautocomplete-placeholder{left:0;min-width:initial;max-width:initial;}
 	/*megamenu*/
@@ -162,6 +162,36 @@
 	.sorter .sort-by{margin:10px 0 0 0;}
 	.sorter .limiter{float:left;margin:10px 0 0 0;}
 	.sorter .sort-by>label,.sorter .limiter>label{display:inline-block;width:50px;}
+/*featureproduct*/
+	.featuredproduct{padding-bottom: 0;}
+	.featuredproduct .featuredBox{top:76px!important;}
+	.featuredproduct .bx-title .f-right{float: left!important;}
+	.featuredproduct .bx-title .f-right li>span{display: none}
+/*smartphone*/
+	.smartphone .leftbox{display: none;}
+	.smartphone .div-tabs{width: 100%!important;height:auto!important;}
+	.smartphone .ul-tabs{width:100%!important;}
+	.smartphone .ul-tabs>li{width:33.33%;float: left;height:110px;border:none;}
+	.ul-tabs > li.active > a:before{top: -5px!important;left:50%!important;}
+	.ul-tabs > li > a{display: block;width:100%;height: 100%;}
+/*brand-box*/
+	.brand-box>.container{padding: 0!important;}
+	.brand-box .block-image,.brand-box .block-content-right{width:100%!important;}
+	.brand-box .block-content-right{padding: 15px 15px 10px 15px!important;}
+	.brand-box .block-content-right .count-down-time{margin-top:10px;}
+	.brand-box .box-content .block-content-right .shop-now{margin-top:16px;}
+	.brand-box .box-content{padding: 14px!important;}
+	.count-down-time{position: relative;}
+	.count-down-time .icon-clock{position: absolute;top:4px;}
+	.countdown{margin-left:25px!important;}
+	.countdown .timer-box{padding: 0 10px 0 0!important;}
+	.timer-box:after{margin-left: 4px!important;}
+/*newproductslider*/
+	.newproductslider .products-grid li.item{width:50%!important;}
+	.newproductslider .products-grid li.item:nth-child(n+5){display: none!important;}
+	.banner-content2-wrapper .row>div:first-child{margin-bottom: 14px;}
+	.access-wrapper{margin: 0;}
+	.service .service-item{padding: 10px 10px 10px 14px!important;margin-bottom: 20px;}
 }
 @media (min-width:768px){	
 	.drop-currency .currency-trigger .sub-currency{left:initial;right:0;}
