@@ -192,6 +192,7 @@
 	.banner-content2-wrapper .row>div:first-child{margin-bottom: 14px;}
 	.access-wrapper{margin: 0;}
 	.service .service-item{padding: 10px 10px 10px 14px!important;margin-bottom: 20px;}
+	.products-list li.item .box-images{width:auto;height:auto;}
 }
 @media (min-width:768px){	
 	.drop-currency .currency-trigger .sub-currency{left:initial;right:0;}
