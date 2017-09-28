@@ -199,6 +199,7 @@
 	.featuredproduct .box-images a>img{width:156px;height:156px;}
 	.dealproducts .box-images a>img{width:190px;height:190px;}
 	.brandlogo-contain .bxslider img{width:160px;height:80px;}
+	.banner-box .position2{margin-left: 269px;}
 }
 @media (max-width: 1280px){
 	.access-box.container{padding:0;}
